@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .book-cover {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Livraria Online</h1>
+        
+        <!-- Filtros de busca -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select id="categoria" class="form-select">
+                    <option value="">Todas</option>
+                    <!-- Adicione as categorias aqui -->
+                    <option value="ficcao">Ficção</option>
+                    <option value="romance">Romance</option>
+                    <option value="aventura">Aventura</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="nome-livro" class="form-label">Nome do Livro</label>
+                <input type="text" id="nome-livro" class="form-control" placeholder="Buscar por nome do livro">
+            </div>
+            <div class="col-md-3">
+                <label for="nome-autor" class="form-label">Nome do Autor</label>
+                <input type="text" id="nome-autor" class="form-control" placeholder="Buscar por nome do autor">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100">Buscar</button>
+            </div>
+        </div>
+
+        <!-- Catálogo de livros -->
+        <div class="row">
+            <!-- Exemplo de livro -->
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top book-cover" alt="Capa do Livro">
+                    <div class="card-body">
+                        <h5 class="card-title">Nome do Livro</h5>
+                        <p class="card-text">
+                            <strong>Autor:</strong> Nome do Autor<br>
+                            <strong>Categoria:</strong> Categoria<br>
+                            <strong>Data de Publicação:</strong> 01/01/2023
+                        </p>
+                        <a href="#" class="btn btn-primary">Ver detalhes</a>
+                        <button class="btn btn-success mt-2">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repita o bloco acima para cada livro no catálogo -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
