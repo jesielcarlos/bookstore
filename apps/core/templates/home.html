@@ -13,12 +13,28 @@
             height: 200px;
             object-fit: cover;
         }
+        .header-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Livraria Online</h1>
-        
+        <div class="header-buttons">
+            <h1 class="mb-4">Livraria Online</h1>
+            <div>
+                <a href="{% url 'cart' %}" class="btn btn-warning">
+                    <i class="bi bi-cart"></i> Ver Carrinho
+                </a>
+                <a href="{% url 'order_history' %}" class="btn btn-secondary">
+                    <i class="bi bi-clock-history"></i> Histórico de Compras
+                </a>
+            </div>
+        </div>
+
         <!-- Filtros de busca -->
         <div class="row mb-4">
             <div class="col-md-3">
@@ -46,26 +62,34 @@
 
         <!-- Catálogo de livros -->
         <div class="row">
-            <!-- Exemplo de livro -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top book-cover" alt="Capa do Livro">
-                    <div class="card-body">
-                        <h5 class="card-title">Nome do Livro</h5>
-                        <p class="card-text">
-                            <strong>Autor:</strong> Nome do Autor<br>
-                            <strong>Categoria:</strong> Categoria<br>
-                            <strong>Data de Publicação:</strong> 01/01/2023
-                        </p>
-                        <a href="#" class="btn btn-primary">Ver detalhes</a>
-                        <button class="btn btn-success mt-2">Adicionar ao Carrinho</button>
+            {% if ctx.items %}
+                {% for book in ctx.items %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="{{ book.volumeInfo.imageLinks.thumbnail }}" class="card-img-top book-cover" alt="Capa do Livro">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.volumeInfo.title }}</h5>
+                                <p class="card-text">
+                                    <strong>Autor:</strong> {{ book.volumeInfo.authors|join:", " }}<br>
+                                    <strong>Categoria:</strong> {{ book.volumeInfo.categories|join:", " }}<br>
+                                    <strong>Data de Publicação:</strong> {{ book.volumeInfo.publishedDate }}
+                                </p>
+                                <a href="{{ book.volumeInfo.infoLink }}" class="btn btn-primary">Ver detalhes</a>
+                                <form method="post" action="{% url 'add_to_cart' book.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success mt-2">Adicionar ao Carrinho</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- Repita o bloco acima para cada livro no catálogo -->
+                {% endfor %}
+            {% else %}
+                <p>Nenhum livro encontrado.</p>
+            {% endif %}
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"></script>
 </body>
 </html>
