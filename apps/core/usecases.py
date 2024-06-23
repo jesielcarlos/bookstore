@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from apps.core.exceptions import Default2Exception
+from apps.core.exceptions import DefaultException
 from apps.core.helpers import GoogleBooksAPI, Helpers, ResponseAPI
 from apps.core.models import Book, ItemOrder, Order
 from src.__seedwork.application.use_cases import UseCase
