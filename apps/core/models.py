@@ -6,21 +6,18 @@ class Book(models.Model):
         verbose_name='Titulo',
         max_length=200
     )
-    authors = models.CharField(
+    authors = models.TextField(
         verbose_name='Autor',
-        max_length=200
     )
-    categories = models.CharField(
+    categories = models.TextField(
         verbose_name='Categoria',
-        max_length=100
     )
     publishedDate = models.CharField(
         verbose_name='Data de Publicação',
         max_length=100
     )
-    thumbnail = models.CharField(
+    thumbnail = models.TextField(
         verbose_name='Capa',
-        max_length=200
     )
     pageCount = models.IntegerField(
         verbose_name='Número de páginas',
@@ -69,22 +66,27 @@ class Order(models.Model):
         verbose_name='Data do pedido', 
         auto_now_add=True
     )
-    books = models.ManyToManyField(
-        Book,
-        verbose_name='Livros',
-        through='ItemOrder'
+    is_open = models.BooleanField(
+        verbose_name='Pedido em aberto',
+        default=True
     )
+
+    def total_price(self):
+        total = 0
+        for item in self.itemorder_set.all():
+            total += item.quantity * item.book.price
+        return total
 
     def __str__(self):
         return f"Pedido {self.id} de {self.customer.username}"
 
 
 class ItemOrder(models.Model):
-    pedido = models.ForeignKey(
+    order = models.ForeignKey(
         Order,
         verbose_name='Pedido',
         on_delete=models.DO_NOTHING)
-    livro = models.ForeignKey(
+    book = models.ForeignKey(
         Book,
         verbose_name='Livro',
         on_delete=models.DO_NOTHING)
@@ -94,4 +96,4 @@ class ItemOrder(models.Model):
     )
 
     def __str__(self):
-        return f"{self.quantidade} - {self.livro.titulo}"
+        return f"{self.quantity} - {self.book.title}"

@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho</title>
+    <title>Finalizar Compra</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Carrinho</h1>
+        <h1 class="mb-4">Finalizar Compra</h1>
         {% if order %}
             <ul class="list-group">
-                {% for item in order %}
+                {% for item in order.itemorder_set.all %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        {{ item.book.title }} ({{ item.quantity }})
-                        <span>{{ item.book.price }}</span>
+                        {{ item.livro.title }} ({{ item.quantity }})
+                        <span>R$ {{ item.livro.price }}</span>
                     </li>
                 {% endfor %}
             </ul>
             <div class="mt-4">
-                <a href="{% url 'checkout' %}" class="btn btn-success">Finalizar Compra</a>
+                <form method="post" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Confirmar Compra</button>
+                </form>
             </div>
         {% else %}
             <p>Seu carrinho está vazio.</p>

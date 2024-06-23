@@ -196,8 +196,8 @@ class GoogleBooksAPI:
         default="https://www.googleapis.com/books/v1/volumes"
     )
 
-    def search_books(self, query):
-        url = f"{self.BASE_URL}?q={query}"
+    def search_books(self, query, filter='paid-ebooks'):
+        url = f"{self.BASE_URL}?filter={filter}&q={query}"
         response = requests.get(url)
         
         if response.status_code == 200:
