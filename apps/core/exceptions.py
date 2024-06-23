@@ -4,7 +4,7 @@ from rest_framework.status import (
 )
 
 
-class Default2Exception(Exception):
+class DefaultException(Exception):
     detail: str | dict = "Algo de inesperado aconteceu. Entre em contato com suporte."
     code: int = HTTP_400_BAD_REQUEST
     internal_code: int = ''
@@ -38,6 +38,6 @@ class Default2Exception(Exception):
         return self.detail
 
 
-class ExceptDictTypeException(Default2Exception):
+class ExceptDictTypeException(DefaultException):
     detail = "É esperado um dicionário."
     code = HTTP_401_UNAUTHORIZED
