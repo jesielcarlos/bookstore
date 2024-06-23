@@ -74,6 +74,15 @@ WSGI_APPLICATION = 'bookstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.RedisCache",
+        "LOCATION": decouple.config(
+            "DEFAULT_CACHE_URL", default="redis://localhost:6379/0", cast=str
+        ),
+    }
+}
+
 DATABASES = {
     'default': decouple.config('DATABASE_URL',
         default="postgres://user:123@0.0.0.0:5432/bookstore",
