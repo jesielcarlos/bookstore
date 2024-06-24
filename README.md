@@ -22,7 +22,7 @@ cd seu-repositorio
 from django.core.management.utils import get_random_secret_key
 print(get_random_secret_key())
 ```
-### 2. Criar arquivo .env na raiz do projeto
+### 3. Criar arquivo .env na raiz do projeto
 ```bash
 SECRET_KEY=
 POSTGRES_USER=user
@@ -34,9 +34,11 @@ GOOGLE_BOOKS_API_URL=https://www.googleapis.com/books/v1/volumes
 API_KEY=AIzaSyBBdWfCKxl1GLqI9lIz_HXkmWZaz9tuhWA
 ```
 
-## 3. Executar o comando
+## 4. Executar o comando
 ```bash
 docker-compose up (Para ver logs)
 
 docker-compose up -d (Sem logs)
 ```
+
+## 5. Acessar no navegador http://localhost:8000/
