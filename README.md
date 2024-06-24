@@ -29,6 +29,7 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=123
 POSTGRES_DB=bookstore
 DATABASE_URL=postgres://user:123@db:5432/bookstore
+DEFAULT_CACHE_URL=redis://redis_service:6379/0
 GOOGLE_BOOKS_API_URL=https://www.googleapis.com/books/v1/volumes
 API_KEY=AIzaSyBBdWfCKxl1GLqI9lIz_HXkmWZaz9tuhWA
 ```
