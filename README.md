@@ -16,9 +16,15 @@ Clone este repositório para sua máquina local usando o seguinte comando:
 git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
 ```
+### 2. Gerar um secret_key para o projeto, criando um arquivo .py com o seguinte código
+
+```bash
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+```
 ### 2. Criar arquivo .env na raiz do projeto
 ```bash
-SECRET_KEY=a5r69d@a8s45viyx1h1yqcuah2f771q614&8dcri
+SECRET_KEY=
 POSTGRES_USER=user
 POSTGRES_PASSWORD=123
 POSTGRES_DB=bookstore
